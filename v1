@@ -1,0 +1,80 @@
+import random
+
+endgame = False
+
+
+def pic_card(x, y):
+    if x == 11 or x == 12 or x == 13:
+        return (10)
+    elif (x == 14) and y == "p":
+        z = int(input("do you want your ace to be an 11 or a 1 "))
+        return (z)
+    elif (x == 14) and y == "c":
+        z = random.randrange(1, 12, 10)
+        return (z)
+    else:
+        return (x)
+
+
+p_card_1 = random.randrange(1, 15)
+p_card_1 = pic_card(p_card_1, "p")
+print("your hand is ")
+print(p_card_1)
+
+p_card_2 = random.randrange(1, 15)
+p_card_2 = pic_card(p_card_2, "p")
+print(p_card_2)
+print("       ")
+c_card_1 = random.randrange(1, 15)
+c_card_1 = pic_card(c_card_1, "c")
+print("the computers hand is ")
+print(c_card_1)
+
+c_card_2 = random.randrange(1, 15)
+c_card_2 = pic_card(c_card_2, "c")
+# ----------------------------
+p_tot = p_card_1 + p_card_2
+c_tot = c_card_1 + c_card_2
+
+
+# -------------------------
+def twist():
+    temp = random.randrange(1, 15)
+    temp = pic_card(temp,"p")
+    print("you got a", temp)
+    return (temp)
+
+
+# ------------------
+def stick():
+    if p_tot > c_tot and p_tot <= 21:
+        print("YOU WON")
+        print("the computer had ", c_tot)
+
+    if p_tot < c_tot and c_tot <= 21:
+        print("you lost, the computer had ", c_tot)
+
+    if p_tot == c_tot and p_tot <= 21:
+        print("YOU Drew")
+        print("the computer had ", c_tot)
+
+
+while (p_tot <= 17):
+
+    choice = input("do you want to stick, twist or end the game(end) ")
+    if choice == "stick":
+        stick()
+
+    if choice == "twist":
+        temp = twist()
+
+        p_tot = p_tot + temp
+        print("your total is ", p_tot)
+
+    if p_tot > 21:
+        print("you went bust")
+        break;
+
+    if choice == "end":
+        break;
+
